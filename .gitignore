@@ -1,0 +1,9 @@
+/vendor
+.DS_Store
+.idea/
+Thumbs.db
+composer.lock
+composer.phar
+.scaffold/*
+temp/
+tests/_output/*

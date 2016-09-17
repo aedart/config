@@ -1,0 +1,42 @@
+{
+    "name": "aedart/config",
+    "description": "Configuration utilities",
+    "keywords": [
+        "Config",
+        "Array",
+        "Util"
+
+    ],
+    "homepage": "https://github.com/aedart/config",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4"
+    },
+    "require-dev": {
+        "aedart/license": "1.*",
+        "aedart/license-file-manager": "~1.6",
+        "aedart/testing": "~1.0",
+        "aedart/testing-gst": "~1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Config\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "scripts": {
+        "post-update-cmd": "vendor/bin/license-manager license:copy vendor/aedart/license/aedart/BSD-3-Clause"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
