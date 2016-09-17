@@ -6,9 +6,13 @@
 [![Latest Unstable Version](https://poser.pugx.org/aedart/config/v/unstable)](https://packagist.org/packages/aedart/config)
 [![License](https://poser.pugx.org/aedart/config/license)](https://packagist.org/packages/aedart/config)
 
+Package contains various configuration utilities.
+
 ## Contents
 
 * [How to install](#how-to-install)
+* [Parsers](#parsers)
+  * [Reference Parser](#reference-parser)
 * [Contribution](#contribution)
 * [Acknowledgement](#acknowledgement)
 * [Versioning](#versioning)
@@ -21,6 +25,38 @@ This package uses [composer](https://getcomposer.org/). If you do not know what 
 ```console
 composer require aedart/config
 ```
+
+## Parsers
+
+### Reference Parser
+
+`\Aedart\Config\Parsers\ReferenceParser`
+
+Able of parsing "references" in values.
+
+```php
+<?php
+
+use Aedart\Config\Parsers\ReferenceParser;
+use Illuminate\Config\Repository;
+
+// Given the following array
+$items = [
+    'db.driver'         => '{{defaults.driver}}',
+    'defaults.driver'   => 'abc'
+];
+ 
+// When it is parsed
+$repo   = new Repository($items);
+$config = (new ReferenceParser())->parse($repo);
+ 
+// The 'db.driver' key is parsed to the value of 'defaults.driver'
+echo $config->get('db.driver'); // output 'abc'
+```
+
+**Warning**: Parsing references can cost a lot of processing power. You should cache the result whenever it is possible!
+
+For further references, please consider the unit test; `tests\unit\parsers\ReferenceParserTest.php`
 
 --------------------------
 
