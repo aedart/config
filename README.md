@@ -92,8 +92,7 @@ As soon as I receive the pull-request (_and have time for it_), I will review yo
 
 ## Acknowledgement
 
-* [ PHP ](http://php.net/), `Rasmus Lerdorf & The PHP Group`; we might be developing in old fashioned ASP… (Shivers!)
-
+* [ Laravel ](https://laravel.com), `Taylor Otwell`; ...Never thought to use native php arrays as configuration files before I started using Laravel!
 
 ## Versioning
 
