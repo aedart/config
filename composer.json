@@ -5,7 +5,6 @@
         "Config",
         "Array",
         "Util"
-
     ],
     "homepage": "https://github.com/aedart/config",
     "license": "BSD-3-Clause",
@@ -17,7 +16,8 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4"
+        "php": ">=5.6.4",
+        "illuminate/config": "5.3.*"
     },
     "require-dev": {
         "aedart/license": "1.*",
