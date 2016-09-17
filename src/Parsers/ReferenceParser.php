@@ -135,17 +135,7 @@ class ReferenceParser implements Parser
             // Obtain the value for the reference
             $replacement = $source->get($reference);
 
-            // In case that the replacement contains references itself, we need to
-            // process that replacement entirely.
-            if(is_string($replacement) && preg_match_all($this->pattern, $replacement, $x, PREG_SET_ORDER) !== 0){
-                // Parse references in string
-                $this->parseReferences($source, $reference, $replacement);
-
-                // Re-fetch the replacement
-                $replacement = $source->get($reference);
-            }
-
-            // The same is true, if the replacement is an array
+            // If replacement is an array, then that array must be parsed
             if(is_array($replacement)){
                 // Parse the array
                 $this->performParsing($source, $replacement, $reference);
@@ -157,7 +147,31 @@ class ReferenceParser implements Parser
                 // we need to set the key here and abort any further
                 // processing or we might just re-overwrite it again.
                 $source->set($key, $replacement);
+                $this->processedKeys[$key] = true;
                 return;
+            }
+
+            // If not a string, then we also just set the value and stop
+            // processing - ONLY if the value that we are processing does
+            // not contain multiple references
+            if(!is_string($replacement) && $amount == 1){
+
+                // However, because the replacement is still an array,
+                // we need to set the key here and abort any further
+                // processing or we might just re-overwrite it again.
+                $source->set($key, $replacement);
+                $this->processedKeys[$key] = true;
+                return;
+            }
+
+            // If, however, the replacement is a string, then that string could
+            // contain further references which also need to be processed
+            if(preg_match_all($this->pattern, $replacement, $x, PREG_SET_ORDER) !== 0){
+                // Parse references in string
+                $this->parseReferences($source, $reference, $replacement);
+
+                // Re-fetch the replacement
+                $replacement = $source->get($reference);
             }
 
             // Add token and replacement to list
