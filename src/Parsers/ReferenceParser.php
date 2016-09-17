@@ -6,9 +6,45 @@ use Aedart\Config\Exceptions\ParseException;
 use Illuminate\Contracts\Config\Repository;
 
 /**
- * Reference Parser
+ * <h1>Reference Parser</h1>
  *
- * TODO: desc...
+ * Parse "references" in values.
+ *
+ * <br />
+ *
+ * <b>Example</b>:
+ * <pre>
+ *      // Given the following configuration
+ *      $items = [
+ *          'db.driver'         => '{{defaults.driver}}',
+ *          'defaults.driver'   => 'abc'
+ *      ];
+ *
+ *      // When it is parsed
+ *      $repo   = new Repository($items);
+ *      $config = (new ReferenceParser())->parse($repo);
+ *
+ *      // The 'db.driver' key is parsed to the value of 'defaults.driver'
+ *      echo $config->get('db.driver'); // output 'abc'
+ * </pre>
+ *
+ * <br />
+ *
+ * <b>Reference Syntax</b>:
+ * <pre>
+ *      <option-tag><config-key><close-tag>
+ *
+ *      <option-tag>    : "{{"
+ *      <close-tag>     : "}}"
+ *      <config-key>    : A valid configuration key
+ * </pre>
+ *
+ * <br />
+ *
+ * <b>Warning</b>:
+ *
+ * Parsing references can cost a lot of processing power. Whenever it is possible,
+ * you should cache the result and use the parsed result!
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Config\Parsers
