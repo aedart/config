@@ -23,7 +23,8 @@
         "aedart/license": "1.*",
         "aedart/license-file-manager": "~1.6",
         "aedart/testing": "~1.0",
-        "aedart/testing-gst": "~1.2"
+        "aedart/testing-gst": "~1.2",
+        "symfony/var-dumper": "3.1.*"
     },
     "autoload": {
         "psr-4": {
