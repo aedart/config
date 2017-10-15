@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Aedart\Config\Parsers;
 
 use Aedart\Config\Contracts\Parser;
@@ -84,15 +86,9 @@ class ReferenceParser implements Parser
     }
 
     /**
-     * Parse the given configuration
-     *
-     * @param Repository $config
-     *
-     * @return Repository
-     *
-     * @throws ParseException
+     * @inheritdoc
      */
-    public function parse(Repository $config)
+    public function parse(Repository $config) : Repository
     {
         // Fetch all items
         $items = $config->all();
@@ -114,7 +110,7 @@ class ReferenceParser implements Parser
      * @param array $items [optional]
      * @param string $parentKey [optional]
      */
-    protected function performParsing(Repository $source, array $items = [], $parentKey = '')
+    protected function performParsing(Repository $source, array $items = [], ?string $parentKey = '') : void
     {
         foreach ($items as $childKey => $value){
 
@@ -143,7 +139,7 @@ class ReferenceParser implements Parser
      * @param string $key
      * @param mixed $value
      */
-    protected function parseReferences(Repository $source, $key, $value)
+    protected function parseReferences(Repository $source, string $key, $value) : void
     {
         // Skip if key has already been processed
         if(isset($this->processedKeys[$key])){
@@ -202,7 +198,7 @@ class ReferenceParser implements Parser
 
             // If, however, the replacement is a string, then that string could
             // contain further references which also need to be processed
-            if(preg_match_all($this->pattern, $replacement, $x, PREG_SET_ORDER) !== 0){
+            if(preg_match_all($this->pattern, (string) $replacement, $x, PREG_SET_ORDER) !== 0){
                 // Parse references in string
                 $this->parseReferences($source, $reference, $replacement);
 

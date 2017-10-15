@@ -21,5 +21,5 @@ interface Parser
      *
      * @throws ParseException
      */
-    public function parse(Repository $config);
+    public function parse(Repository $config) : Repository;
 }
