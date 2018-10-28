@@ -1,4 +1,5 @@
 {
+    "abandoned": true,
     "name": "aedart/config",
     "description": "Configuration utilities",
     "keywords": [

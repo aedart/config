@@ -6,7 +6,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/aedart/config/v/unstable)](https://packagist.org/packages/aedart/config)
 [![License](https://poser.pugx.org/aedart/config/license)](https://packagist.org/packages/aedart/config)
 
-Package contains various configuration utilities.
+**Abandoned** - Package contains various configuration utilities.
 
 ## Contents
 
